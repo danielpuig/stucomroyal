@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author danielpuig
  */
 public class ListaCartas {
-    
+
     private ArrayList<Carta> lista;
 
     public ListaCartas() {
@@ -26,18 +26,28 @@ public class ListaCartas {
     public void setLista(ArrayList<Carta> lista) {
         this.lista = lista;
     }
-    
+
     public void agregarCarta(Carta carta) {
-        //TODO
+        if (this.lista.size() < 6) {
+            this.lista.add(carta);
+        } else {
+            System.out.println("No puedes tener más cartas!");
+        }
     }
 
     @Override
     public String toString() {
         return "ListaCartas{" + "lista=" + lista + '}';
     }
-    
+
     public boolean comprobarCarta(Carta carta) {
-        //TODO
+        boolean valid = false;
+        for (Carta carta1 : lista) {
+            if (carta1.equals(carta)) {
+                valid = true;
+            }
+        }
+        return valid;
     }
-    
+
 }

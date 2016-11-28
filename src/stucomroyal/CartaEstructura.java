@@ -27,8 +27,8 @@ public class CartaEstructura extends Carta{
     }
     
     public void incrementarVida(ListaCartas listaCartas) {
-        for(Carta cartaActual: listaCartas.getLista()){
-            cartaActual.setNivelVida(cartaActual.getNivelVida()+(this.nivelDefensa+8));
+        for(Carta carta1: listaCartas.getLista()){
+            carta1.setNivelVida(carta1.getNivelVida()+(this.nivelDefensa+8));
         }
     }
 

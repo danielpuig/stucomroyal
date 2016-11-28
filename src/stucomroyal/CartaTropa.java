@@ -9,8 +9,8 @@ package stucomroyal;
  *
  * @author danielpuig
  */
-public class CartaTropa extends Carta{
-    
+public class CartaTropa extends Carta {
+
     private int nivelAtaque;
 
     public CartaTropa(int nivelAtaque, String nombre, int costeElixir, int nivelVida) {
@@ -25,14 +25,15 @@ public class CartaTropa extends Carta{
     public void setNivelAtaque(int nivelAtaque) {
         this.nivelAtaque = nivelAtaque;
     }
-    
+
     public void atacar(Carta cartaOponente) {
-        //TODO
+        int vida = ((this.nivelAtaque / 2) - cartaOponente.getNivelVida());
+        cartaOponente.setNivelVida(vida);
     }
 
     @Override
     public String toString() {
         return super.toString() + "CartaTropa{" + "nivelAtaque=" + nivelAtaque + '}';
     }
-    
+
 }

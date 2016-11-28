@@ -9,8 +9,8 @@ package stucomroyal;
  *
  * @author danielpuig
  */
-public class CartaHechizo extends Carta{
-    
+public class CartaHechizo extends Carta {
+
     private int nivelAlcance;
     private String modo;
 
@@ -35,14 +35,23 @@ public class CartaHechizo extends Carta{
     public void setModo(String modo) {
         this.modo = modo;
     }
-    
+
     public void activar(ListaCartas listaJugador, ListaCartas listaOponente) {
-        //TODO
+        int hechizo = ((this.nivelAlcance * 2) / 3);
+        if (this.modo.equals("ataque")) {
+            for (Carta cartaActual : listaOponente.getLista()) {
+                cartaActual.setNivelVida(cartaActual.getNivelVida() - hechizo);
+            }
+        } else if (this.modo.equals("defensa")) {
+            for (Carta cartaActual : listaJugador.getLista()) {
+                cartaActual.setNivelVida(cartaActual.getNivelVida() + hechizo);
+            }
+        }
     }
 
     @Override
     public String toString() {
         return super.toString() + "CartaHechizo{" + "nivelAlcance=" + nivelAlcance + ", modo=" + modo + '}';
     }
-    
+
 }
