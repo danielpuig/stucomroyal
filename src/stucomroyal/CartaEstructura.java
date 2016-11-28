@@ -26,6 +26,13 @@ public class CartaEstructura extends Carta{
         this.nivelDefensa = nivelDefensa;
     }
     
-    
+    public void incrementarVida(ListaCartas listaCartas) {
+        //TODO
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "CartaEstructura{" + "nivelDefensa=" + nivelDefensa + '}';
+    }
     
 }

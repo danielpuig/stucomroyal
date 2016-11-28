@@ -16,14 +16,11 @@ public class Jugador {
     private int numTrofeos;
     private ListaCartas cartas;
 
-    public Jugador() {
-    }
-
     public Jugador(String nombre, String password, int numTrofeos, ListaCartas cartas) {
         this.nombre = nombre;
         this.password = password;
         this.numTrofeos = numTrofeos;
-        this.cartas = cartas;
+        this.cartas = new ListaCartas();
     }
 
     public String getNombre() {
@@ -58,6 +55,9 @@ public class Jugador {
         this.cartas = cartas;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Jugador{" + "nombre=" + nombre + ", password=" + password + ", numTrofeos=" + numTrofeos + ", cartas=" + cartas + '}';
+    }
     
 }

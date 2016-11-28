@@ -36,6 +36,13 @@ public class CartaHechizo extends Carta{
         this.modo = modo;
     }
     
-    
+    public void activar(ListaCartas listaJugador, ListaCartas listaOponente) {
+        //TODO
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "CartaHechizo{" + "nivelAlcance=" + nivelAlcance + ", modo=" + modo + '}';
+    }
     
 }

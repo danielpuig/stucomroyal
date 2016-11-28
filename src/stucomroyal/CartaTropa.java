@@ -26,6 +26,13 @@ public class CartaTropa extends Carta{
         this.nivelAtaque = nivelAtaque;
     }
     
-    
+    public void atacar(Carta cartaOponente) {
+        //TODO
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "CartaTropa{" + "nivelAtaque=" + nivelAtaque + '}';
+    }
     
 }

@@ -44,7 +44,10 @@ public abstract class Carta {
     public void setNivelVida(int nivelVida) {
         this.nivelVida = nivelVida;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Carta{" + "nombre=" + nombre + ", costeElixir=" + costeElixir + ", nivelVida=" + nivelVida + '}';
+    }
     
 }
