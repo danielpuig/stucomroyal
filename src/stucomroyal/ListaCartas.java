@@ -5,10 +5,39 @@
  */
 package stucomroyal;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author danielpuig
  */
 public class ListaCartas {
+    
+    private ArrayList<Carta> lista;
+
+    public ListaCartas() {
+        lista = new ArrayList<>();
+    }
+
+    public ArrayList<Carta> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<Carta> lista) {
+        this.lista = lista;
+    }
+    
+    public void agregarCarta(Carta carta) {
+        //TODO
+    }
+
+    @Override
+    public String toString() {
+        return "ListaCartas{" + "lista=" + lista + '}';
+    }
+    
+    public boolean comprobarCarta(Carta carta) {
+        //TODO
+    }
     
 }
