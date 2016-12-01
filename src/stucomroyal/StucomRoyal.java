@@ -16,112 +16,104 @@ import java.util.logging.Logger;
 public class StucomRoyal {
 
     private static ListaJugadores listaJugadores = new ListaJugadores();
-    private static ListaCartas listaCartasGlobales = new ListaCartas();
-    private static ListaCartas cartasBatallaJugadorUno = new ListaCartas();
-    private static ListaCartas cartasBatallaJugadorDos = new ListaCartas();
-    //Crear jugadores
-    private static Jugador alfredo = new Jugador("Alfredo", "0000", 0);
-    private static Jugador xavi = new Jugador("Xavi", "1111", 0);
-    private static Jugador dani = new Jugador("Dani", "2222", 0);
-    private static Jugador brian = new Jugador("Brian", "3333", 0);
-
-    //Crear Cartas
-    //Carta tropa
-    private static Carta guerreroConHacha = new CartaTropa(5, "Guerrero con hacha", 2, 60);
-    private static Carta guerreroConEspada = new CartaTropa(10, "Guerrero con espada", 3, 70);
-    private static Carta guerreroConHachaEspada = new CartaTropa(20, "Guerrero con hacha espada", 5, 100);
-    //Carta estructura
-    private static Carta pastor = new CartaEstructura(3, "pastor", 2, 30);
-    private static Carta monje = new CartaEstructura(5, "monje", 3, 50);
-    private static Carta shaman = new CartaEstructura(10, "shaman", 5, 70);
-    //Carta Hechizo
-    private static Carta gritoDeGuerra = new CartaHechizo(5, "ataque", "Grito de guerra", 3, 50);
-    private static Carta regeneracionDeTropas = new CartaHechizo(5, "defensa", "Regeneracion de tropas", 3, 60);
-    private static Carta maximumBellumEtClamor = new CartaHechizo(15, "ataque", "Maximum bellum et clamor", 5, 40);
-    //---------------------------------------------------------------------
+    private static ListaCartas listaCartasDisponibles = new ListaCartas();
+    private static ListaCartas cartasPrimerJugador = new ListaCartas();
+    private static ListaCartas cartasSegundoJugador = new ListaCartas();
+    
+    private static Jugador alvaro = new Jugador("Alvaro", "A1", 0);
+    private static Jugador viruz = new Jugador("Viruz", "V1", 0);
+    private static Jugador orange = new Jugador("Orange", "O1", 0);
+    private static Jugador chief = new Jugador("Chief", "C1", 0);
+    
+    private static Carta arquera = new CartaTropa(5, "Arquera", 2, 60);
+    private static Carta bombardero = new CartaTropa(10, "Bombardero", 3, 70);
+    private static Carta caballero = new CartaTropa(20, "Caballero", 5, 100);
+    
+    private static Carta canon = new CartaEstructura(3, "Cañon", 2, 30);
+    private static Carta tesla = new CartaEstructura(5, "Tesla", 3, 50);
+    private static Carta mortero = new CartaEstructura(10, "Mortero", 5, 70);
+    
+    private static Carta rayo = new CartaHechizo(5, "ataque", "Rayo", 3, 50);
+    private static Carta hielo = new CartaHechizo(5, "defensa", "Hielo", 3, 60);
+    private static Carta veneno = new CartaHechizo(15, "ataque", "Veneno", 5, 40);
 
     public static void main(String[] args) {
 
-        listaJugadores.getLista().add(alfredo);
-        listaJugadores.getLista().add(xavi);
-        listaJugadores.getLista().add(dani);
-        listaJugadores.getLista().add(brian);
-        //Add players---------------------
-        listaCartasGlobales.getLista().add(guerreroConHacha);
-        listaCartasGlobales.getLista().add(guerreroConEspada);
-        listaCartasGlobales.getLista().add(guerreroConHachaEspada);
+        listaJugadores.getLista().add(alvaro);
+        listaJugadores.getLista().add(viruz);
+        listaJugadores.getLista().add(orange);
+        listaJugadores.getLista().add(chief);
+        
+        listaCartasDisponibles.getLista().add(arquera);
+        listaCartasDisponibles.getLista().add(bombardero);
+        listaCartasDisponibles.getLista().add(caballero);
 
-        listaCartasGlobales.getLista().add(pastor);
-        listaCartasGlobales.getLista().add(monje);
-        listaCartasGlobales.getLista().add(shaman);
+        listaCartasDisponibles.getLista().add(canon);
+        listaCartasDisponibles.getLista().add(tesla);
+        listaCartasDisponibles.getLista().add(mortero);
 
-        listaCartasGlobales.getLista().add(gritoDeGuerra);
-        listaCartasGlobales.getLista().add(regeneracionDeTropas);
-        listaCartasGlobales.getLista().add(maximumBellumEtClamor);
-        //Add cartas globales
+        listaCartasDisponibles.getLista().add(rayo);
+        listaCartasDisponibles.getLista().add(hielo);
+        listaCartasDisponibles.getLista().add(veneno);
         
+        alvaro.getCartas().agregarCarta(arquera);
+        alvaro.getCartas().agregarCarta(bombardero);
+        alvaro.getCartas().agregarCarta(caballero);
+        alvaro.getCartas().agregarCarta(canon);
+        alvaro.getCartas().agregarCarta(tesla);
+        alvaro.getCartas().agregarCarta(mortero);
         
-        //TEMP**********
-        alfredo.getCartas().agregarCarta(guerreroConHacha);
-        alfredo.getCartas().agregarCarta(guerreroConEspada);
-        alfredo.getCartas().agregarCarta(guerreroConHachaEspada);
-        alfredo.getCartas().agregarCarta(pastor);
-        alfredo.getCartas().agregarCarta(monje);
-        alfredo.getCartas().agregarCarta(shaman);
+        viruz.getCartas().agregarCarta(arquera);
+        viruz.getCartas().agregarCarta(bombardero);
+        viruz.getCartas().agregarCarta(caballero);
+        viruz.getCartas().agregarCarta(canon);
+        viruz.getCartas().agregarCarta(tesla);
+        viruz.getCartas().agregarCarta(mortero);
         
-        xavi.getCartas().agregarCarta(guerreroConHacha);
-        xavi.getCartas().agregarCarta(guerreroConEspada);
-        xavi.getCartas().agregarCarta(guerreroConHachaEspada);
-        xavi.getCartas().agregarCarta(pastor);
-        xavi.getCartas().agregarCarta(monje);
-        xavi.getCartas().agregarCarta(shaman);
-        //**************
-        
-        mostrarMenu();
-        int op;
+        int opc;
         do {
-
-            op = tools.InputData.pedirEntero("Introduce una opción");
-            switch (op) {
+            mostrarMenu();
+            opc = tools.InputData.pedirEntero("Introduce una opción: ");
+            switch (opc) {
                 case 1:
-                    conseguirCartas();
+                    getCartas();
                     break;
-                case 2:
+                case 2://Seguir Revisando from here
                     logUsuarios();
                     break;
                 case 3:
                     showRanking();
                     break;
                 case 4:
-                    System.out.println("¡Adios!");
+                    System.out.println("Has salido del programa.");
                     break;
                 default:
                     break;
             }
-        } while (op != 4);
+        } while (opc != 4);
 
     }
 
     private static void mostrarMenu() {
-        System.out.println("1) Conseguir cartas");
-        System.out.println("2) ¡Batalla!");
-        System.out.println("3) Mostrar jugadores por trofeos");
-        System.out.println("4) Salir");
+        System.out.println("[1] Añadir cartas a tu mazo.");
+        System.out.println("[2] Combate.");
+        System.out.println("[3] Ranking.");
+        System.out.println("[4] Salir.");
 
     }
 
-    private static void conseguirCartas() {
+    private static void getCartas() {
         Jugador jugador = getJugador();
 
         if (jugador != null) {
-            validUserCards(jugador);
+            comprobarCartas(jugador);
         } else {
-            System.out.println("No valido!");
+            System.out.println("No es valido");
         }
 
     }
 
-    private static void validUserCards(Jugador jugador) {
+    private static void comprobarCartas(Jugador jugador) {
         int contCarta = 0;
         int opAddCarta = 0;
         boolean repAddCarta = false;
@@ -132,7 +124,7 @@ public class StucomRoyal {
             System.out.println("----------------------------------");
             System.out.println("");
             System.out.println("Cartas disponibles: ");
-            for (Carta cartaActual : listaCartasGlobales.getLista()) {
+            for (Carta cartaActual : listaCartasDisponibles.getLista()) {
                 System.out.println(contCarta + ")" + cartaActual);
                 contCarta++;
             }
@@ -142,19 +134,19 @@ public class StucomRoyal {
                 opAddCarta = tools.InputData.pedirEntero("Selecciona el numero de una carta que desees agregar a tu mazo: ");
 
                 //Existe el index?
-                if (listaCartasGlobales.getLista().size() <= opAddCarta) {
+                if (listaCartasDisponibles.getLista().size() <= opAddCarta) {
                     System.out.println("No existe una carta con ese numero...");
 
-                } else if (listaCartasGlobales.getLista().size() > opAddCarta) {
+                } else if (listaCartasDisponibles.getLista().size() > opAddCarta) {
 
                     //Evaluamos si tiene ya esa carta...
-                    if (jugador.getCartas().comprobarCarta(listaCartasGlobales.getLista().get(opAddCarta))) {
+                    if (jugador.getCartas().comprobarCarta(listaCartasDisponibles.getLista().get(opAddCarta))) {
                         System.out.println("Ya tienes esta carta en tu mazo!");
                     } else {
                         //Usando addCard siempre comprobamos que no pasamos de 6 cartas desde dentro de la clase ListaCartas
                         //jugador.getListaCartas().getLista().add(listaCartasGlobales.getLista().get(opAddCarta));
-                        jugador.getCartas().agregarCarta(listaCartasGlobales.getLista().get(opAddCarta));
-                        System.out.println("Carta " + listaCartasGlobales.getLista().get(opAddCarta).getNombre() + " agregada!");
+                        jugador.getCartas().agregarCarta(listaCartasDisponibles.getLista().get(opAddCarta));
+                        System.out.println("Carta " + listaCartasDisponibles.getLista().get(opAddCarta).getNombre() + " agregada!");
                     }
 
                     mostrarCartasSeleccionadas(jugador);
@@ -178,7 +170,6 @@ public class StucomRoyal {
 
     }
 
-    @SuppressWarnings("empty-statement")
     public static String stringNotEmpty(String mensaje) {
         String getString;
         do {
@@ -287,12 +278,12 @@ public class StucomRoyal {
         do {
 
             System.out.println("Preparando batalla...");
-            cartasBatallaJugadorUno = fillCartasBatalla(jugadorUno);
-            cartasBatallaJugadorDos = fillCartasBatalla(jugadorDos);
+            cartasPrimerJugador = fillCartasBatalla(jugadorUno);
+            cartasSegundoJugador = fillCartasBatalla(jugadorDos);
             System.out.println("Mazo de batalla de " + jugadorUno.getNombre());
-            System.out.println(cartasBatallaJugadorUno);
+            System.out.println(cartasPrimerJugador);
             System.out.println("Mazo de batalla de " + jugadorDos.getNombre());
-            System.out.println(cartasBatallaJugadorDos);
+            System.out.println(cartasSegundoJugador);
             continueToBatalla = askYesNo("¿Son estos datos correctos?");
 
         } while (!continueToBatalla);
@@ -366,10 +357,10 @@ public class StucomRoyal {
         //Status de la batalla
         int vidaJugadorUno = 0;
         int vidaJugadorDos = 0;
-        for(Carta cartaActual: cartasBatallaJugadorUno.getLista()){
+        for(Carta cartaActual: cartasPrimerJugador.getLista()){
             vidaJugadorUno+=cartaActual.getNivelVida();
         }
-        for(Carta cartaActual: cartasBatallaJugadorDos.getLista()){
+        for(Carta cartaActual: cartasSegundoJugador.getLista()){
             vidaJugadorDos+=cartaActual.getNivelVida();
         }
         System.out.println("Vida de las cartas de "+jugadorUno.getNombre()+": "+vidaJugadorUno);
@@ -395,22 +386,22 @@ public class StucomRoyal {
     
     public static void turnoJugadorUno(){
         int selectAtack = (int) Math.floor(Math.random() * 3);
-        for(Carta cartaActual: cartasBatallaJugadorUno.getLista()){
+        for(Carta cartaActual: cartasPrimerJugador.getLista()){
                 if(cartaActual instanceof CartaTropa){
-                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasBatallaJugadorDos.getLista().get(selectAtack).getNombre()+"!");
-                    ((CartaTropa) cartaActual).atacar(cartasBatallaJugadorDos.getLista().get(selectAtack));
+                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasSegundoJugador.getLista().get(selectAtack).getNombre()+"!");
+                    ((CartaTropa) cartaActual).atacar(cartasSegundoJugador.getLista().get(selectAtack));
                     
                     System.out.println("Resultado:");
-                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasBatallaJugadorDos.getLista().get(selectAtack).getNombre()+" "+cartasBatallaJugadorDos.getLista().get(selectAtack).getNivelVida());
+                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasSegundoJugador.getLista().get(selectAtack).getNombre()+" "+cartasSegundoJugador.getLista().get(selectAtack).getNivelVida());
                     
                 }
                 if(cartaActual instanceof CartaEstructura){
                     System.out.println("La carta "+cartaActual.getNombre()+" regenera vida al resto de tus cartas!");
-                    ((CartaEstructura) cartaActual).incrementarVida(cartasBatallaJugadorUno);
+                    ((CartaEstructura) cartaActual).incrementarVida(cartasPrimerJugador);
                 }
                 if(cartaActual instanceof CartaHechizo){
                     System.out.println("La carta "+cartaActual.getNombre()+" es activada con el modo"+((CartaHechizo) cartaActual).getModo()+"!");
-                    ((CartaHechizo) cartaActual).activar(cartasBatallaJugadorUno, cartasBatallaJugadorDos);
+                    ((CartaHechizo) cartaActual).activar(cartasPrimerJugador, cartasSegundoJugador);
                 }
                 
                 selectAtack = (int) Math.floor(Math.random() * 3);
@@ -423,21 +414,21 @@ public class StucomRoyal {
     public static void turnoJugadorDos(){
         int selectAtack = (int) Math.floor(Math.random() * 3);
         
-        for(Carta cartaActual: cartasBatallaJugadorDos.getLista()){
+        for(Carta cartaActual: cartasSegundoJugador.getLista()){
                 if(cartaActual instanceof CartaTropa){
-                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasBatallaJugadorUno.getLista().get(selectAtack).getNombre()+"!");
-                    ((CartaTropa) cartaActual).atacar(cartasBatallaJugadorUno.getLista().get(selectAtack));
+                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasPrimerJugador.getLista().get(selectAtack).getNombre()+"!");
+                    ((CartaTropa) cartaActual).atacar(cartasPrimerJugador.getLista().get(selectAtack));
                     
                     System.out.println("Resultado:");
-                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasBatallaJugadorUno.getLista().get(selectAtack).getNombre()+" "+cartasBatallaJugadorUno.getLista().get(selectAtack).getNivelVida());
+                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasPrimerJugador.getLista().get(selectAtack).getNombre()+" "+cartasPrimerJugador.getLista().get(selectAtack).getNivelVida());
                 }
                 if(cartaActual instanceof CartaEstructura){
                     System.out.println("La carta "+cartaActual.getNombre()+" regenera vida al resto de tus cartas!");
-                    ((CartaEstructura) cartaActual).incrementarVida(cartasBatallaJugadorDos);
+                    ((CartaEstructura) cartaActual).incrementarVida(cartasSegundoJugador);
                 }
                 if(cartaActual instanceof CartaHechizo){
                     System.out.println("La carta "+cartaActual.getNombre()+" es activada con el modo"+((CartaHechizo) cartaActual).getModo()+"!");
-                    ((CartaHechizo) cartaActual).activar(cartasBatallaJugadorDos, cartasBatallaJugadorUno);
+                    ((CartaHechizo) cartaActual).activar(cartasSegundoJugador, cartasPrimerJugador);
                 }
                  selectAtack = (int) Math.floor(Math.random() * 3);
                  System.out.println("");
