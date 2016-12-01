@@ -27,7 +27,7 @@ public class CartaTropa extends Carta {
     }
 
     public void atacar(Carta cartaOponente) {
-        int vida = ((this.nivelAtaque / 2) - cartaOponente.getNivelVida());
+        int vida = (cartaOponente.getNivelVida() - (this.nivelAtaque / 2));
         cartaOponente.setNivelVida(vida);
     }
 

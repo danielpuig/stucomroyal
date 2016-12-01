@@ -9,7 +9,7 @@ package stucomroyal;
  *
  * @author danielpuig
  */
-public abstract class Carta {
+public abstract class Carta implements Cloneable{
     
     private String nombre;
     private int costeElixir;
@@ -48,6 +48,11 @@ public abstract class Carta {
     @Override
     public String toString() {
         return "Carta{" + "nombre=" + nombre + ", costeElixir=" + costeElixir + ", nivelVida=" + nivelVida + '}';
+    }
+    
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

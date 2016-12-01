@@ -5,18 +5,20 @@
  */
 package stucomroyal;
 
+import java.util.Comparator;
+
 /**
  *
  * @author danielpuig
  */
-public class Jugador {
-    
+public class Jugador implements Comparable<Jugador> {
+
     private String nombre;
     private String password;
     private int numTrofeos;
     private ListaCartas cartas;
 
-    public Jugador(String nombre, String password, int numTrofeos, ListaCartas cartas) {
+    public Jugador(String nombre, String password, int numTrofeos) {
         this.nombre = nombre;
         this.password = password;
         this.numTrofeos = numTrofeos;
@@ -59,5 +61,10 @@ public class Jugador {
     public String toString() {
         return "Jugador{" + "nombre=" + nombre + ", password=" + password + ", numTrofeos=" + numTrofeos + ", cartas=" + cartas + '}';
     }
-    
+
+    @Override
+    public int compareTo(Jugador o) {
+        return Integer.compare(o.numTrofeos, this.numTrofeos);
+    }
+
 }
