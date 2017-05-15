@@ -78,8 +78,8 @@ public class StucomRoyal {
                 case 1:
                     getCartas();
                     break;
-                case 2://Seguir Revisando from here
-                    logUsuarios();
+                case 2:
+                    //TODO
                     break;
                 case 3:
                     showRanking();
@@ -117,7 +117,6 @@ public class StucomRoyal {
         int contCarta = 0;
         int opAddCarta = 0;
         boolean repAddCarta = false;
-        //TODO Dejarlo aqui o controlarlo directamente en el menu principal?
         if (jugador.getCartas().getLista().size() < 6) {
 
             System.out.println("Bienvenido, " + jugador.getNombre());
@@ -133,18 +132,14 @@ public class StucomRoyal {
                 System.out.println("Total de cartas en tu mazo: " + jugador.getCartas().getLista().size());
                 opAddCarta = tools.InputData.pedirEntero("Selecciona el numero de una carta que desees agregar a tu mazo: ");
 
-                //Existe el index?
                 if (listaCartasDisponibles.getLista().size() <= opAddCarta) {
                     System.out.println("No existe una carta con ese numero...");
 
                 } else if (listaCartasDisponibles.getLista().size() > opAddCarta) {
 
-                    //Evaluamos si tiene ya esa carta...
                     if (jugador.getCartas().comprobarCarta(listaCartasDisponibles.getLista().get(opAddCarta))) {
                         System.out.println("Ya tienes esta carta en tu mazo!");
                     } else {
-                        //Usando addCard siempre comprobamos que no pasamos de 6 cartas desde dentro de la clase ListaCartas
-                        //jugador.getListaCartas().getLista().add(listaCartasGlobales.getLista().get(opAddCarta));
                         jugador.getCartas().agregarCarta(listaCartasDisponibles.getLista().get(opAddCarta));
                         System.out.println("Carta " + listaCartasDisponibles.getLista().get(opAddCarta).getNombre() + " agregada!");
                     }
@@ -153,16 +148,14 @@ public class StucomRoyal {
 
                 }
 
-                //Llegamos al maximo?
                 if (jugador.getCartas().getLista().size() >= 6) {
                     System.out.println("Maximo de cartas alcanzado!");
                 } else {
-                    repAddCarta = askYesNo("Continural seleccionando cartas?");
+                    repAddCarta = preguntar("Continuar seleccionando cartas?");
                 }
 
             } while (repAddCarta && jugador.getCartas().getLista().size() < 6);
 
-            //Si sale del menu y vuelve a entrar...
         } else {
             System.out.println("Maximo de cartas alcanzado!");
             mostrarCartasSeleccionadas(jugador);
@@ -170,7 +163,7 @@ public class StucomRoyal {
 
     }
 
-    public static String stringNotEmpty(String mensaje) {
+    public static String stringNoVacio(String mensaje) {
         String getString;
         do {
             getString = tools.InputData.pedirCadena(mensaje);
@@ -182,10 +175,10 @@ public class StucomRoyal {
         return getString;
     }
 
-    public static boolean askYesNo(String mensaje) {
+    public static boolean preguntar(String mensaje) {
         String aws;
         do {
-            aws = stringNotEmpty(mensaje + " [si][no]");
+            aws = stringNoVacio(mensaje + " (si/no)");
             if (!aws.equalsIgnoreCase("si") && !aws.equalsIgnoreCase("no")) {
                 System.out.println("Por favor, introduce un valor valido");
             }
@@ -212,29 +205,6 @@ public class StucomRoyal {
         System.out.println("--------------------------------------------");
     }
 
-    public static void logUsuarios() {
-        Jugador jugadorUno = getJugador();
-        if (jugadorUno == null || jugadorUno.getCartas().getLista().size() != 6) {
-            System.out.println("No valido p1!");
-            if (jugadorUno.getCartas().getLista().size() != 6) {
-                System.out.println("No tienes 6 cartas en tu mazo!");
-            }
-        } else {
-            Jugador jugadorDos = getJugador();
-            if (jugadorDos == null || jugadorDos.getCartas().getLista().size() != 6) {
-                System.out.println("No valido p2!");
-                if (jugadorDos.getCartas().getLista().size() != 6) {
-                    System.out.println("No tienes 6 cartas en tu mazo!");
-                }
-            } else {
-                //Login Valido
-                //Seleccionamos cartas de cada jugador
-                getCartasBatalla(jugadorUno, jugadorDos);
-            }
-        }
-
-    }
-
     public static Jugador getJugador() {
         Jugador jugador = null;
         boolean valid = false;
@@ -244,12 +214,11 @@ public class StucomRoyal {
         String psswd = "";
         boolean userContinue = true;
         do {
-            username = stringNotEmpty(">>>");
+            username = stringNoVacio("-->");
             System.out.println("Password: ");
-            psswd = stringNotEmpty(">>>");
+            psswd = stringNoVacio("-->");
 
             for (Jugador jugadorActual : listaJugadores.getLista()) {
-                //El username puede ser diferente dependiendo de las mayusculas...
 
                 if (jugadorActual.getNombre().equals(username) && jugadorActual.getPassword().equals(psswd)) {
                     jugador = jugadorActual;
@@ -259,7 +228,7 @@ public class StucomRoyal {
                 }
             }
             if (userContinue) {
-                userContinue = askYesNo("El usuario no es valido. Volver a intentar?");
+                userContinue = preguntar("El usuario no es valido. Volver a intentar?");
 
             }
 
@@ -270,25 +239,6 @@ public class StucomRoyal {
         } else {
             return null;
         }
-    }
-
-    public static void getCartasBatalla(Jugador jugadorUno, Jugador jugadorDos) {
-        
-        boolean continueToBatalla;
-        do {
-
-            System.out.println("Preparando batalla...");
-            cartasPrimerJugador = fillCartasBatalla(jugadorUno);
-            cartasSegundoJugador = fillCartasBatalla(jugadorDos);
-            System.out.println("Mazo de batalla de " + jugadorUno.getNombre());
-            System.out.println(cartasPrimerJugador);
-            System.out.println("Mazo de batalla de " + jugadorDos.getNombre());
-            System.out.println(cartasSegundoJugador);
-            continueToBatalla = askYesNo("¿Son estos datos correctos?");
-
-        } while (!continueToBatalla);
-        
-        simularBatalla(jugadorUno,jugadorDos);
     }
 
     public static ListaCartas fillCartasBatalla(Jugador jugador) {
@@ -307,14 +257,7 @@ public class StucomRoyal {
             } else {
                 
                 if ((totalElixir + jugador.getCartas().getLista().get(cardIndex).getCosteElixir() <10 && timesCards>1)||(totalElixir + jugador.getCartas().getLista().get(cardIndex).getCosteElixir() <=10&&timesCards<=1)) {
-                    //Podra escoger cartas que no sumen el total de su elixir, y no podra seleccionar 2 de 5, 
-                    //Logica detras del espagueti:
-                    //Si le sumamos el elixir de la nueva carta al total de elixir sera menor a 10? Tengo solo 2 cartas?
-                    //Para que el nivel de elixir pueda ser igual a 10, tengo que estar en la ultima carta
-                    //ej: primera 5, segunda 5 => error, no puedo
-                    //primera 5, segunda 3, tercera 2 : 10 elixir
                     try {
-
                         cartasBatalla.agregarCarta((Carta) jugador.getCartas().getLista().get(cardIndex).clone());
                         timesCards--;
                         totalElixir+=jugador.getCartas().getLista().get(cardIndex).getCosteElixir();
@@ -331,111 +274,6 @@ public class StucomRoyal {
         } while (cardIndex >= jugador.getCartas().getLista().size() || timesCards != 0);
 
         return cartasBatalla;
-    }
-    
-    
-    public static void simularBatalla(Jugador jugadorUno, Jugador jugadorDos){
-        
-        int turno = (int) Math.floor(Math.random() * 2);
-        int selectAtack = (int) Math.floor(Math.random() * 3);
-        if(turno==1){
-            //Empieza jugador1
-            System.out.println("Empiza "+jugadorUno.getNombre()+"!");
-            turnoJugadorUno();
-            System.out.println("Turno de  "+jugadorDos.getNombre()+"!");
-            turnoJugadorDos();
-            
-        }else{
-            //Empieza jugador2
-            System.out.println("Empiza "+jugadorDos.getNombre()+"!");
-            turnoJugadorDos();
-            System.out.println("Turno de  "+jugadorUno.getNombre()+"!");
-            turnoJugadorUno();
-            
-        }
-        
-        //Status de la batalla
-        int vidaJugadorUno = 0;
-        int vidaJugadorDos = 0;
-        for(Carta cartaActual: cartasPrimerJugador.getLista()){
-            vidaJugadorUno+=cartaActual.getNivelVida();
-        }
-        for(Carta cartaActual: cartasSegundoJugador.getLista()){
-            vidaJugadorDos+=cartaActual.getNivelVida();
-        }
-        System.out.println("Vida de las cartas de "+jugadorUno.getNombre()+": "+vidaJugadorUno);
-        System.out.println("Vida de las cartas de "+jugadorDos.getNombre()+": "+vidaJugadorDos);
-        
-        if(vidaJugadorUno>vidaJugadorDos){
-            System.out.println("Felicidades "+jugadorUno.getNombre()+" has ganado!");
-            System.out.println("Has obtenido 5 trofeos!");
-            jugadorUno.setNumTrofeos(jugadorUno.getNumTrofeos()+5);
-            
-        }else if(vidaJugadorDos>vidaJugadorUno){
-            System.out.println("Felicidades "+jugadorDos.getNombre()+" has ganado!");
-            System.out.println("Has obtenido 5 trofeos!");
-            jugadorDos.setNumTrofeos(jugadorDos.getNumTrofeos()+5);
-        }else if(vidaJugadorDos==vidaJugadorUno){
-            System.out.println("Empate!");
-            System.out.println("Ambos obtienen 5 trofeos!");
-            jugadorUno.setNumTrofeos(jugadorUno.getNumTrofeos()+5);
-            jugadorDos.setNumTrofeos(jugadorDos.getNumTrofeos()+5);
-        }
-        
-    }
-    
-    public static void turnoJugadorUno(){
-        int selectAtack = (int) Math.floor(Math.random() * 3);
-        for(Carta cartaActual: cartasPrimerJugador.getLista()){
-                if(cartaActual instanceof CartaTropa){
-                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasSegundoJugador.getLista().get(selectAtack).getNombre()+"!");
-                    ((CartaTropa) cartaActual).atacar(cartasSegundoJugador.getLista().get(selectAtack));
-                    
-                    System.out.println("Resultado:");
-                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasSegundoJugador.getLista().get(selectAtack).getNombre()+" "+cartasSegundoJugador.getLista().get(selectAtack).getNivelVida());
-                    
-                }
-                if(cartaActual instanceof CartaEstructura){
-                    System.out.println("La carta "+cartaActual.getNombre()+" regenera vida al resto de tus cartas!");
-                    ((CartaEstructura) cartaActual).incrementarVida(cartasPrimerJugador);
-                }
-                if(cartaActual instanceof CartaHechizo){
-                    System.out.println("La carta "+cartaActual.getNombre()+" es activada con el modo"+((CartaHechizo) cartaActual).getModo()+"!");
-                    ((CartaHechizo) cartaActual).activar(cartasPrimerJugador, cartasSegundoJugador);
-                }
-                
-                selectAtack = (int) Math.floor(Math.random() * 3);
-                System.out.println("");
-                
-                System.out.println("-----TURNO----");
-            }
-        
-    }
-    public static void turnoJugadorDos(){
-        int selectAtack = (int) Math.floor(Math.random() * 3);
-        
-        for(Carta cartaActual: cartasSegundoJugador.getLista()){
-                if(cartaActual instanceof CartaTropa){
-                    System.out.println("La carta "+cartaActual.getNombre()+" ataca a "+cartasPrimerJugador.getLista().get(selectAtack).getNombre()+"!");
-                    ((CartaTropa) cartaActual).atacar(cartasPrimerJugador.getLista().get(selectAtack));
-                    
-                    System.out.println("Resultado:");
-                    System.out.println(cartaActual.getNombre()+" "+cartaActual.getNivelVida()+"\t"+cartasPrimerJugador.getLista().get(selectAtack).getNombre()+" "+cartasPrimerJugador.getLista().get(selectAtack).getNivelVida());
-                }
-                if(cartaActual instanceof CartaEstructura){
-                    System.out.println("La carta "+cartaActual.getNombre()+" regenera vida al resto de tus cartas!");
-                    ((CartaEstructura) cartaActual).incrementarVida(cartasSegundoJugador);
-                }
-                if(cartaActual instanceof CartaHechizo){
-                    System.out.println("La carta "+cartaActual.getNombre()+" es activada con el modo"+((CartaHechizo) cartaActual).getModo()+"!");
-                    ((CartaHechizo) cartaActual).activar(cartasSegundoJugador, cartasPrimerJugador);
-                }
-                 selectAtack = (int) Math.floor(Math.random() * 3);
-                 System.out.println("");
-                 System.out.println("-----TURNO----");
-            }
-        
-       
     }
     
     public static void showRanking(){
